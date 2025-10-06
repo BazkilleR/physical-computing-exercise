@@ -2,43 +2,49 @@
 #include <string.h>
 #include <math.h>
 
-// ฟังก์ชันพิมพ์เส้นกรอบด้านบน/ล่าง
-void print_border(int width)
-{
-  for (int i = 0; i < width; i++)
-    printf("*");
-  printf("\n");
-}
-
-// ฟังก์ชันพิมพ์ข้อความให้อยู่กึ่งกลาง
-void print_center_line(char *text, int width)
-{
-  int spaces_left = ceil((width - 2 - strlen(text)) / 2.0);
-  int spaces_right = (width - 2 - strlen(text)) - spaces_left;
-
-  printf("*");
-  for (int i = 0; i < spaces_left; i++)
-    printf(" ");
-  printf("%s", text);
-  for (int i = 0; i < spaces_right; i++)
-    printf(" ");
-  printf("*\n");
-}
+void start(int x);
+void centers(int x, char str[]);
 
 int main()
 {
-  char str1[51], str2[41];
-  int width;
+  int NUM;
+  char str1[50], str2[40];
 
-  // รับ input
-  scanf("%d", &width);
-  scanf("%50s %40s", str1, str2);
+  scanf(" %d", &NUM);
+  scanf(" %[^\n]", str1);
+  scanf(" %[^\n]", str2);
 
-  // พิมพ์กล่องข้อความ
-  print_border(width);
-  print_center_line(str1, width);
-  print_center_line(str2, width);
-  print_border(width);
+  start(NUM);
+  centers(NUM, str1);
+  centers(NUM, str2);
+  start(NUM);
 
   return 0;
+}
+
+void start(int x)
+{
+  for (int i = 0; i < x; i++)
+  {
+    printf("*");
+  }
+  printf("\n");
+}
+
+void centers(int x, char str[])
+{
+  printf("*");
+  float t = ((x - 2) - strlen(str)) / 2.0;
+  int c = ceil(t);
+  int target = x - c - strlen(str);
+  for (int i = 0; i < c; i++)
+  {
+    printf(" ");
+  }
+  printf("%s", str);
+  for (int i = 0; i < target - 2; i++)
+  {
+    printf(" ");
+  }
+  printf("*\n");
 }
